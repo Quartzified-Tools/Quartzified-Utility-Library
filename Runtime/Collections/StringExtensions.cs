@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -36,6 +37,7 @@ namespace Quartzified.Collections
         public static bool IsNullOrEmpty(this string input)
         {
             return string.IsNullOrEmpty(input);
+            
         }
         public static bool IsNotNullOrEmpty(this string input)
         {
@@ -71,6 +73,13 @@ namespace Quartzified.Collections
         public static string ToLower(this string input)
         {
             return input?.ToLower();
+        }
+
+        public static string ToTitleCase(this string input)
+        {
+            var cultureInfo = CultureInfo.CurrentCulture;
+            var textInfo = cultureInfo.TextInfo;
+            return textInfo.ToTitleCase(input);
         }
 
         /// <summary>
@@ -151,6 +160,7 @@ namespace Quartzified.Collections
             }
             return true;
         }
+
         /// <summary>
         /// Checks if the input string is fully lower case.
         /// </summary>
@@ -319,6 +329,24 @@ namespace Quartzified.Collections
                 }
             }
             return true;
+        }
+
+        /// <summary>
+        /// Returns an array converted into a string 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
+        public static string ArrayToString(this Array input, string separator)
+        {
+            var ret = new StringBuilder();
+            for (var i = 0; i < input.Length; i++)
+            {
+                ret.Append(input.GetValue(i));
+                if (i != input.Length - 1)
+                    ret.Append(separator);
+            }
+            return ret.ToString();
         }
     }
 

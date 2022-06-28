@@ -681,6 +681,64 @@ namespace Quartzified.Mathematics
 
         #endregion
 
+        #region Clamp
+
+        /// <summary>
+        /// Clamp Integer between 2 values
+        /// </summary>
+        /// <param name="value">Value to Clamp</param>
+        /// <param name="min">Smallest Number</param>
+        /// <param name="max">Largest Number</param>
+        /// <returns></returns>
+        public static int Clamp(int value, int min, int max)
+        {
+            if (value < min) return min;
+            if (value > max) return max;
+            return value;
+        }
+
+        /// <summary>
+        /// Clamp Float between 2 values
+        /// </summary>
+        /// <param name="value">Value to Clamp</param>
+        /// <param name="min">Smallest Number</param>
+        /// <param name="max">Largest Number</param>
+        /// <returns></returns>
+        public static float Clamp(float value, float min, float max)
+        {
+            if (value < min) return min;
+            if (value > max) return max;
+            return value;
+        }
+
+        /// <summary>
+        /// Clamp Double between 2 values
+        /// </summary>
+        /// <param name="value">Value to Clamp</param>
+        /// <param name="min">Smallest Number</param>
+        /// <param name="max">Largest Number</param>
+        /// <returns></returns>
+        public static double Clamp(double value, double min, double max)
+        {
+            if (value < min) return min;
+            if (value > max) return max;
+            return value;
+        }
+
+        /// <summary>
+        /// Clamp Decimal between 2 values
+        /// </summary>
+        /// <param name="value">Value to Clamp</param>
+        /// <param name="min">Smallest Number</param>
+        /// <param name="max">Largest Number</param>
+        /// <returns></returns>
+        public static decimal Clamp(decimal value, decimal min, decimal max)
+        {
+            if (value < min) return min;
+            if (value > max) return max;
+            return value;
+        }
+
         /// <summary>
         /// Clamp Long between 2 values
         /// </summary>
@@ -688,12 +746,22 @@ namespace Quartzified.Mathematics
         /// <param name="min">Smallest Number</param>
         /// <param name="max">Largest Number</param>
         /// <returns></returns>
-        public static long ClampLong(long value, long min, long max)
+        public static long Clamp(long value, long min, long max)
         {
             if (value < min) return min;
             if (value > max) return max;
             return value;
         }
+
+        public static float Clamp01(float value)
+        {
+            value = value > 1f ? 1 : value;
+            value = value < 0f ? 0 : value;
+
+            return value;
+        }
+
+        #endregion
 
         public static float Remap(float value, float f1, float t1, float f2, float t2)
         {
@@ -709,5 +777,29 @@ namespace Quartzified.Mathematics
         {
             return (value - f1) / (t1 - f1) * (t2 - f2) + f2;
         }
+
+        public static float Lerp(float a, float b, float t)
+        {
+            return a + (b - a) * Clamp01(t);
+        }
+
+        public static float LerpUnclamped(float a, float b, float t)
+        {
+            return a + (b - a) * t;
+        }
+
+        #region Angles
+
+        public static float Angle(float x1, float y1, float x2, float y2)
+        {
+            return (float)(Math.Atan2(y2 - y1, x2 - x1) * 180 / Math.PI);
+        }
+
+        public static float AngleAverage(float a, float b)
+        {
+            return Lerp(a, b, 0.5f);
+        }
+
+        #endregion
     }
 }

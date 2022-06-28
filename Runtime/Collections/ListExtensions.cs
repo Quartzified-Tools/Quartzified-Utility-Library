@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Quartzified.Collections
@@ -44,5 +46,18 @@ namespace Quartzified.Collections
                 return false;
             }
         }
+
+        public static bool HasDuplicates<T>(this List<T> list)
+        {
+            return list.Count != list.Distinct().Count();
+        }
+
+        public static List<U> FindDuplicates<T, U>(this List<T> list, Func<T, U> keySelector)
+        {
+            return list.GroupBy(keySelector)
+                .Where(group => group.Count() > 1)
+                .Select(group => group.Key).ToList();
+        }
+
     }
 }
