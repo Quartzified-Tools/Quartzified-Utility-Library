@@ -11,7 +11,6 @@ This repository was made for the convenience of having functions that we use oft
 - Fancier Debugging
 - and a lot more...
 
-<hr>
 
 ## FAQ
 **Supported Unity Versions?**  
