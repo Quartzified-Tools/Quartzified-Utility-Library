@@ -3,6 +3,14 @@
 
 This repository was made for the convenience of having functions that we use often in one place and not having to write them every time.  
 
+## Features
+
+- Vast amount of simple Math Utilities
+- A lot of String Extensions
+- Various Gizmos Extensions
+- Fancier Debugging
+- and a lot more...
+
 <hr>
 
 ## FAQ
