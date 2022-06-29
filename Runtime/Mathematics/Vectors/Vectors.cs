@@ -15,8 +15,27 @@ namespace Quartzified.Mathematics.Vectors
         {
             System.Random r1 = new System.Random();
 
-            float rndX = (float)r1.NextDouble() * (radius - radius) + radius;
-            float rndY = (float)r1.NextDouble() * (radius - radius) + radius;
+            float rndX = (float)r1.NextDouble() * radius;
+            float rndY = (float)r1.NextDouble() * radius;
+
+            Vector2 newPosition = new Vector2(startPosition.x + rndX, startPosition.y + rndY);
+
+            return newPosition;
+        }
+
+        /// <summary>
+        /// Returns random Coordinate around startPosition within range
+        /// </summary>
+        /// <param name="startPosition">Center Point</param>
+        /// <param name="radiusMin">Min Radius Area</param>
+        /// <param name="radiusMax">Max Radius Area</param>
+        /// <returns></returns>
+        public static Vector2 GetRandomVectorAreaRange(Vector2 startPosition, float radiusMin, float radiusMax)
+        {
+            System.Random r1 = new System.Random();
+
+            float rndX = (float)r1.NextDouble() * (radiusMax - radiusMin) + radiusMin;
+            float rndY = (float)r1.NextDouble() * (radiusMax - radiusMin) + radiusMin;
 
             Vector2 newPosition = new Vector2(startPosition.x + rndX, startPosition.y + rndY);
 
@@ -33,9 +52,29 @@ namespace Quartzified.Mathematics.Vectors
         {
             System.Random r1 = new System.Random();
 
-            float rndX = (float)r1.NextDouble() * (radius - radius) + radius;
-            float rndY = (float)r1.NextDouble() * (radius - radius) + radius;
-            float rndZ = (float)r1.NextDouble() * (radius - radius) + radius;
+            float rndX = (float)r1.NextDouble() * radius;
+            float rndY = (float)r1.NextDouble() * radius;
+            float rndZ = (float)r1.NextDouble() * radius;
+
+            Vector3 newPosition = new Vector3(startPosition.x + rndX, startPosition.y + rndY, startPosition.z + rndZ);
+
+            return newPosition;
+        }
+
+        /// <summary>
+        /// Returns random Coordinate around startPosition within range
+        /// </summary>
+        /// <param name="startPosition">Center Point</param>
+        /// <param name="radiusMin">Min Radius Area</param>
+        /// <param name="radiusMax">Max Radius Area</param>
+        /// <returns></returns>
+        public static Vector3 GetRandomVectorAreaRange(Vector3 startPosition, float radiusMin, float radiusMax)
+        {
+            System.Random r1 = new System.Random();
+
+            float rndX = (float)r1.NextDouble() * (radiusMax - radiusMin) + radiusMin;
+            float rndY = (float)r1.NextDouble() * (radiusMax - radiusMin) + radiusMin;
+            float rndZ = (float)r1.NextDouble() * (radiusMax - radiusMin) + radiusMin;
 
             Vector3 newPosition = new Vector3(startPosition.x + rndX, startPosition.y + rndY, startPosition.z + rndZ);
 
