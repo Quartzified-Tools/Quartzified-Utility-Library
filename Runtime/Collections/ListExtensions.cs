@@ -7,6 +7,14 @@ namespace Quartzified.Collections
 {
     public static class ListExtensions
     {
+        /// <summary>
+        /// Returns the List converted into a string.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="link"></param>
+        /// <param name="separator"></param>
+        /// <returns></returns>
         public static string ToString<T>(this List<T> list, bool link, string separator = ", ")
         {
             if (!link) return list.ToString();
@@ -22,7 +30,8 @@ namespace Quartzified.Collections
         }
 
         /// <summary>
-        /// Sets a value at a specific index. If the index does not exist, add empty positions untill the index can be set.
+        /// Sets a value at a specific index.
+        ///  If the index does not exist, keep adding empty positions until the index can be set.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="list"></param>
@@ -47,11 +56,25 @@ namespace Quartzified.Collections
             }
         }
 
+        /// <summary>
+        /// Returns true if a duplicate is found in the List.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="list"></param>
+        /// <returns></returns>
         public static bool HasDuplicates<T>(this List<T> list)
         {
             return list.Count != list.Distinct().Count();
         }
 
+        /// <summary>
+        /// Returns a List of duplicate entries found in the given List.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="U"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="keySelector"></param>
+        /// <returns></returns>
         public static List<U> FindDuplicates<T, U>(this List<T> list, Func<T, U> keySelector)
         {
             return list.GroupBy(keySelector)
@@ -59,5 +82,15 @@ namespace Quartzified.Collections
                 .Select(group => group.Key).ToList();
         }
 
+        /// <summary>
+        /// Returns one random entry from the List.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static object GetRandom<T>(this List<T> list)
+        {
+            return list[Mathematics.Random.GetRandom(0, list.Count - 1)];
+        }
     }
 }

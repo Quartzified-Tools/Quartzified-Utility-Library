@@ -331,23 +331,7 @@ namespace Quartzified.Collections
             return true;
         }
 
-        /// <summary>
-        /// Returns an array converted into a string 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <param name="separator"></param>
-        /// <returns></returns>
-        public static string ArrayToString(this Array input, string separator)
-        {
-            var ret = new StringBuilder();
-            for (var i = 0; i < input.Length; i++)
-            {
-                ret.Append(input.GetValue(i));
-                if (i != input.Length - 1)
-                    ret.Append(separator);
-            }
-            return ret.ToString();
-        }
+
     }
 
 }
