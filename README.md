@@ -1,6 +1,6 @@
 # Quartzified-Utility-Library
 #### Original Contributors: Quartzi & ToasterBirb.
-The full list of official contributors can be found [here](https://github.com/Quartzified-Studios/Quartzified-Utility-Library/blob/main/contributers.md).
+The full list of official contributors can be found [here](https://github.com/Quartzified-Studios/Quartzified-Utility-Library/blob/main/contributers.md).  
 
 This repository was made for the convenience of having functions that we use often in one place and not having to write them every time.  
 
