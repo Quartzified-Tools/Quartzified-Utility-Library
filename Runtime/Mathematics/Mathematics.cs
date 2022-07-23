@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Quartzified.Mathematics
 {
-    public class Mathematics
+    public static class Mathematics
     {
         #region GetSum
 
@@ -753,12 +753,50 @@ namespace Quartzified.Mathematics
             return value;
         }
 
+        /// <summary>
+        /// Clamp T between 2 values
+        /// </summary>
+        /// <param name="value">Value to Clamp</param>
+        /// <param name="min">Smaller Value</param>
+        /// <param name="max">Bigger Value</param>
+        /// <returns></returns>
+        public static T Clamp<T>(T value, T max, T min) where T : System.IComparable<T>
+        {
+            return value.CompareTo(max) > 0 ?
+                max : value.CompareTo(min) < 0 ?
+                min : value;
+        }
+
         public static float Clamp01(float value)
         {
             value = value > 1f ? 1 : value;
             value = value < 0f ? 0 : value;
 
             return value;
+        }
+
+        #endregion
+
+        #region To Type
+
+        public static int ToInt(this string value, int defaultValue = 0)
+        {
+            int.TryParse(value, out defaultValue);
+            return defaultValue;
+        }
+        public static int ToInt(this bool boolean) => boolean ? 1 : 0;
+
+        public static float ToFloat(this string value, float defaultValue = 0)
+        {
+            float.TryParse(value, out defaultValue);
+            return defaultValue;
+        }
+        public static float ToFloat(this bool boolean) => boolean ? 1f : 0f;
+
+        public static long ToLong(this string value, long defaultValue = 0)
+        {
+            long.TryParse(value, out defaultValue);
+            return defaultValue;
         }
 
         #endregion
@@ -808,6 +846,30 @@ namespace Quartzified.Mathematics
         public static float AngleAverage(float a, float b)
         {
             return Lerp(a, b, 0.5f);
+        }
+
+        #endregion
+
+        #region Quick Conversion
+
+        public static float ToDeg(this float v)
+        {
+            return v * 180 / (float)Math.PI;
+        }
+
+        public static double ToDeg(this double v)
+        {
+            return v * 180 / Math.PI;
+        }
+
+        public static float ToRad(this float v)
+        {
+            return v * (float)Math.PI / 180;
+        }
+
+        public static double ToRad(this double v)
+        {
+            return v * Math.PI / 180;
         }
 
         #endregion
