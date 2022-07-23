@@ -112,5 +112,19 @@ namespace Quartzified.Mathematics.Vectors
             }
             return closest;
         }
+
+        public static float GetClosestDistance(Transform a, Transform b)
+        {
+            float distance = Vector3.Distance(a.transform.position, b.gameObject.transform.position);
+
+            float radiusA = BoundsRadius(a.GetComponent<Collider>().bounds);
+            float radiusB = BoundsRadius(b.GetComponent<Collider>().bounds);
+
+            float distanceInside = distance - radiusA - radiusB;
+
+            return Mathf.Max(distanceInside, 0);
+        }
+        public static float BoundsRadius(Bounds bounds) => (bounds.extents.x + bounds.extents.z) / 2;
+
     }
 }

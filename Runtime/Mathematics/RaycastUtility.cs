@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Quartzified.Mathematics.Raycasts
 {
-    public static class RaycastExtensions
+    public static class RaycastUtility
     {
         public static RaycastHit2D Raycast2DWithout(Ray ray, GameObject ignore)
         {
