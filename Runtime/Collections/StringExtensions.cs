@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -332,6 +333,70 @@ namespace Quartzified.Collections
         }
 
 
+        #region Split
+
+        public static string[] SplitInPartsArray(this string input, int partLength = 2)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
+            if (partLength <= 0)
+            {
+                throw new ArgumentException("Part length has to be positive.", nameof(partLength));
+            }
+
+            string[] temp = new string[input.Length / partLength];
+            int c = 0;
+
+            for (var i = 0; i < input.Length; i += partLength)
+            {
+                temp[c] = input.Substring(i, Math.Min(partLength, input.Length - i));
+                c++;
+            }
+
+            return temp;
+        }
+
+        public static IEnumerable<string> SplitInParts(this string input, int partLength)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
+            if (partLength <= 0)
+            {
+                throw new ArgumentException("Part length has to be positive.", nameof(partLength));
+            }
+
+            for (var i = 0; i < input.Length; i += partLength)
+            {
+                yield return input.Substring(i, Math.Min(partLength, input.Length - i));
+            }
+        }
+
+        // Alloc Free Method
+        public static IEnumerable<ReadOnlyMemory<char>> SplitInPartsFree(this string input, int partLength)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException(nameof(input));
+            }
+
+            if (partLength <= 0)
+            {
+                throw new ArgumentException("Part length has to be positive.", nameof(partLength));
+            }
+
+            for (var i = 0; i < input.Length; i += partLength)
+            {
+                yield return input.AsMemory().Slice(i, Math.Min(partLength, input.Length - i));
+            }
+        }
+
+        #endregion
     }
 
 }
