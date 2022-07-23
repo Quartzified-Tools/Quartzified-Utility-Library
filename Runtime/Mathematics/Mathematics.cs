@@ -778,7 +778,17 @@ namespace Quartzified.Mathematics
             return (value - f1) / (t1 - f1) * (t2 - f2) + f2;
         }
 
+        public static int Lerp(int a, int b, float t)
+        {
+            return a + (int)((b - a) * Clamp01(t));
+        }
+
         public static float Lerp(float a, float b, float t)
+        {
+            return a + (b - a) * Clamp01(t);
+        }
+
+        public static double Lerp(double a, double b, float t)
         {
             return a + (b - a) * Clamp01(t);
         }
