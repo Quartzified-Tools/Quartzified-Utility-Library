@@ -397,6 +397,24 @@ namespace Quartzified.Collections
         }
 
         #endregion
+
+        static Regex lastNountRegEx = new Regex(@"([A-Z][a-z]*)");
+        public static string ParseLastNoun(string text)
+        {
+            MatchCollection matches = lastNountRegEx.Matches(text);
+            return matches.Count > 0 ? matches[matches.Count - 1].Value : "";
+        }
+
+        public static int GetStableHashCode(this string text)
+        {
+            unchecked
+            {
+                int hash = 23;
+                foreach (char c in text)
+                    hash = hash * 31 + c;
+                return hash;
+            }
+        }
     }
 
 }
