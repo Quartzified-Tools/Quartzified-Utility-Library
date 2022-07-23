@@ -44,5 +44,17 @@ namespace Quartzified.Events
             }
 #endif
         }
+
+        public static bool IsCursorOverUserInterface()
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+                return true;
+
+            for (int i = 0; i < Input.touchCount; ++i)
+                if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
+                    return true;
+
+            return GUIUtility.hotControl != 0;
+        }
     }
 }
