@@ -759,6 +759,40 @@ namespace Quartzified.Mathematics
 
         #endregion
 
+        #region Round / Floor / Ceil
+
+        #region Round
+
+        public static float Round(float a) => (float)Math.Round(a);
+        public static double Round(double a) => (double)Math.Round(a);
+
+        public static int RoundToInt(float a) => (int)Math.Round(a);
+        public static int RoundToInt(double a) => (int)Math.Round(a);
+
+        #endregion
+
+        #region Floor
+
+        public static float Floor(float a) => (float)Math.Floor(a);
+        public static double Floor(double a) => (double)Math.Floor(a);
+
+        public static int FloorToInt(float a) => (int)Math.Floor(a);
+        public static int FloorToInt(double a) => (int)Math.Floor(a);
+
+        #endregion
+
+        #region Ceil
+
+        public static float Ceil(float a) => (float)Math.Ceiling(a);
+        public static double Ceil(double a) => (double)Math.Ceiling(a);
+
+        public static int CeilToInt(float a) => (int)Math.Ceiling(a);
+        public static int CeilToInt(double a) => (int)Math.Ceiling(a);
+
+        #endregion
+
+        #endregion
+
         #region To Type
 
         public static int ToInt(this string value, int defaultValue = 0)
