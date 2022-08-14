@@ -5,6 +5,7 @@ namespace Quartzified.Mathematics
 {
     public static class Mathematics
     {
+
         #region GetSum
 
         /// <summary>
@@ -128,7 +129,7 @@ namespace Quartzified.Mathematics
         #region GetMedian
 
         /// <summary>
-        /// Returns the Median (Does not return decimals)
+        /// Returns the Median
         /// </summary>
         /// <param name="inputs"></param>
         /// <returns></returns>
@@ -386,10 +387,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static int GetMin(int[] inputs)
         {
-            int[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[0];
+            int min = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] < min)
+                    min = inputs[i];
+            }
+
+            return min;
         }
 
         /// <summary>
@@ -399,10 +407,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static float GetMin(float[] inputs)
         {
-            float[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[0];
+            float min = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] < min)
+                    min = inputs[i];
+            }
+
+            return min;
         }
 
         /// <summary>
@@ -412,10 +427,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static double GetMin(double[] inputs)
         {
-            double[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[0];
+            double min = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] < min)
+                    min = inputs[i];
+            }
+
+            return min;
         }
 
         /// <summary>
@@ -425,10 +447,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static decimal GetMin(decimal[] inputs)
         {
-            decimal[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[0];
+            decimal min = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] < min)
+                    min = inputs[i];
+            }
+
+            return min;
         }
 
         #endregion
@@ -442,10 +471,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static int GetMax(int[] inputs)
         {
-            int[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[temp.Length - 1];
+            int max = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] > max)
+                    max = inputs[i];
+            }
+
+            return max;
         }
 
         /// <summary>
@@ -455,10 +491,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static float GetMax(float[] inputs)
         {
-            float[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[temp.Length - 1];
+            float max = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] > max)
+                    max = inputs[i];
+            }
+
+            return max;
         }
 
         /// <summary>
@@ -468,10 +511,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static double GetMax(double[] inputs)
         {
-            double[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[temp.Length - 1];
+            double max = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] > max)
+                    max = inputs[i];
+            }
+
+            return max;
         }
 
         /// <summary>
@@ -481,10 +531,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static decimal GetMax(decimal[] inputs)
         {
-            decimal[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[temp.Length - 1];
+            decimal max = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] > max)
+                    max = inputs[i];
+            }
+
+            return max;
         }
 
         #endregion
