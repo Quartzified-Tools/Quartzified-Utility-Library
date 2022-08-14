@@ -1,0 +1,19 @@
+{
+    "name": "Quartzified.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9a99cb463272f984481a6ca30e2e574e",
+        "GUID:51f86d501b19171449b1a9df84acf6c2"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
