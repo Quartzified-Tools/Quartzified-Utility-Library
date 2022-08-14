@@ -496,40 +496,28 @@ namespace Quartzified.Mathematics
         /// </summary>
         /// <param name="inputs"></param>
         /// <returns></returns>
-        public static int GetRange(int[] inputs)
-        {
-            return GetMax(inputs) - GetMin(inputs);
-        }
+        public static int GetRange(int[] inputs) => GetMax(inputs) - GetMin(inputs);
 
         /// <summary>
         /// Returns the Range
         /// </summary>
         /// <param name="inputs"></param>
         /// <returns></returns>
-        public static float GetRange(float[] inputs)
-        {
-            return GetMax(inputs) - GetMin(inputs);
-        }
+        public static float GetRange(float[] inputs) => GetMax(inputs) - GetMin(inputs);
 
         /// <summary>
         /// Returns the Range
         /// </summary>
         /// <param name="inputs"></param>
         /// <returns></returns>
-        public static double GetRange(double[] inputs)
-        {
-            return GetMax(inputs) - GetMin(inputs);
-        }
+        public static double GetRange(double[] inputs) => GetMax(inputs) - GetMin(inputs);
 
         /// <summary>
         /// Returns the Range
         /// </summary>
         /// <param name="inputs"></param>
         /// <returns></returns>
-        public static decimal GetRange(decimal[] inputs)
-        {
-            return GetMax(inputs) - GetMin(inputs);
-        }
+        public static decimal GetRange(decimal[] inputs) => GetMax(inputs) - GetMin(inputs);
 
         #endregion
 
@@ -541,10 +529,7 @@ namespace Quartzified.Mathematics
         /// <param name="value"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public static int GetPercent(int value, int total)
-        {
-            return (value * 100) / total;
-        }
+        public static int GetPercent(int value, int total) => (value * 100) / total;
 
         /// <summary>
         /// Returns the Percentage
@@ -552,10 +537,7 @@ namespace Quartzified.Mathematics
         /// <param name="value"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public static float GetPercent(float value, float total)
-        {
-            return (value * 100f) / total;
-        }
+        public static float GetPercent(float value, float total) => (value* 100f) / total;
 
         /// <summary>
         /// Returns the Percentage
@@ -563,10 +545,7 @@ namespace Quartzified.Mathematics
         /// <param name="value"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public static double GetPercent(double value, double total)
-        {
-            return (value * 100) / total;
-        }
+        public static double GetPercent(double value, double total) => (value * 100d) / total;
 
         /// <summary>
         /// Returns the Percentage
@@ -574,12 +553,15 @@ namespace Quartzified.Mathematics
         /// <param name="value"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public static decimal GetPercent(decimal value, decimal total)
-        {
-            return (value * 100) / total;
-        }
+        public static decimal GetPercent(decimal value, decimal total) => (value * 100) / total;
 
         #endregion
+
+        public static float Sqrt(float a) => (float)Math.Sqrt(a);
+        public static double Sqrt(double a) => (double)Math.Sqrt(a);
+
+        public static float Abs(float a) => (float)Math.Abs(a);
+        public static double Abs(double a) => (double)Math.Abs(a);
 
         #region Percent Utility
 
@@ -801,6 +783,8 @@ namespace Quartzified.Mathematics
 
         #endregion
 
+        #region Remap
+
         public static float Remap(float value, float f1, float t1, float f2, float t2)
         {
             return (value - f1) / (t1 - f1) * (t2 - f2) + f2;
@@ -815,6 +799,10 @@ namespace Quartzified.Mathematics
         {
             return (value - f1) / (t1 - f1) * (t2 - f2) + f2;
         }
+
+        #endregion
+
+        #region Lerp
 
         public static int Lerp(int a, int b, float t)
         {
@@ -836,7 +824,34 @@ namespace Quartzified.Mathematics
             return a + (b - a) * t;
         }
 
+        #endregion
+
         #region Angles
+
+        #region Basics
+
+        public static float Sin(float a) => (float)Math.Sin(a);
+        public static double Sin(double a) => Math.Sin(a);
+
+        public static float Cos(float a) => (float)Math.Cos(a);
+        public static double Cos(double a) => Math.Cos(a);
+
+        public static float Tan(float a) => (float)Math.Tan(a);
+        public static double Tan(double a) => Math.Tan(a);
+
+        public static float Asin(float a) => (float)Math.Asin(a);
+        public static double Asin(double a) => Math.Asin(a);
+
+        public static float Acos(float a) => (float)Math.Acos(a);
+        public static double Acos(double a) => Math.Acos(a);
+
+        public static float Atan(float a) => (float)Math.Atan(a);
+        public static double Atan(double a) => Math.Atan(a);
+
+        public static float Atan(float x, float y) => (float)Math.Atan2(y, x);
+        public static double Atan(double x, double y) => (double)Math.Atan2(y, x);
+
+        #endregion
 
         public static float Angle(float x1, float y1, float x2, float y2)
         {
