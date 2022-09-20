@@ -2,126 +2,129 @@ using UnityEditor;
 using System.Reflection;
 using System;
 
-public class ViewSizeGroupExtension
+namespace Quartzified.Editor.ViewSize
 {
-    public enum ViewSizeType { AspectRatio, FixedResolution }
-
-    object groupObj;
-
-    public ViewSizeGroupExtension(GameViewSizeGroupType type)
+    public class ViewSizeGroupExtension
     {
-        Assembly assembly = typeof(Editor).Assembly;
+        public enum ViewSizeType { AspectRatio, FixedResolution }
 
-        Type sizes = assembly.GetType("UnityEditor.GameViewSizes");
-        Type singleton = typeof(ScriptableSingleton<>).MakeGenericType(sizes);
+        object groupObj;
 
-        MethodInfo group = sizes.GetMethod("GetGroup");
-
-        object instance = singleton.GetProperty("instance").GetValue(null, null);
-
-        groupObj = group.Invoke(instance, new object[] { (int)type });
-    }
-
-    public int GetCount()
-    {
-        MethodInfo totalCount = groupObj.GetType().GetMethod("GetTotalCount");
-        if (totalCount != null)
+        public ViewSizeGroupExtension(GameViewSizeGroupType type)
         {
-            object count = totalCount.Invoke(groupObj, null);
-            if (count is int)
+            Assembly assembly = typeof(UnityEditor.Editor).Assembly;
+
+            Type sizes = assembly.GetType("UnityEditor.GameViewSizes");
+            Type singleton = typeof(ScriptableSingleton<>).MakeGenericType(sizes);
+
+            MethodInfo group = sizes.GetMethod("GetGroup");
+
+            object instance = singleton.GetProperty("instance").GetValue(null, null);
+
+            groupObj = group.Invoke(instance, new object[] { (int)type });
+        }
+
+        public int GetCount()
+        {
+            MethodInfo totalCount = groupObj.GetType().GetMethod("GetTotalCount");
+            if (totalCount != null)
             {
-                return (int)count;
+                object count = totalCount.Invoke(groupObj, null);
+                if (count is int)
+                {
+                    return (int)count;
+                }
+            }
+            return 0;
+        }
+
+        public ViewSizeExtension GetViewSize(int index)
+        {
+            MethodInfo viewSize = groupObj.GetType().GetMethod("GetGameViewSize");
+            if (viewSize != null)
+            {
+                object view = viewSize.Invoke(groupObj, new object[] { index });
+                if (view != null)
+                {
+                    return new ViewSizeExtension(view);
+                }
+            }
+            return null;
+        }
+
+        public ViewSizeExtension GetViewSize(string name)
+        {
+            int count = GetCount();
+            for (int i = 0; i < count; i++)
+            {
+                ViewSizeExtension view = GetViewSize(i);
+                if (name.Equals(view.GetName()))
+                {
+                    return view;
+                }
+            }
+            return null;
+        }
+
+        void AddFixedViewSize(string name, int w, int h)
+        {
+            Assembly assembly = typeof(UnityEditor.Editor).Assembly;
+
+            Type viewSize = assembly.GetType("UnityEditor.GameViewSize");
+            Type type = assembly.GetType("UnityEditor.GameViewSizeType");
+
+            ConstructorInfo constructor = viewSize.GetConstructor(new Type[] { type, typeof(int), typeof(int), typeof(string) });
+
+            object newSize = constructor.Invoke(new object[] { (int)ViewSizeType.FixedResolution, w, h, name });
+
+            groupObj.GetType().GetMethod("AddCustomSize").Invoke(groupObj, new object[] { newSize });
+        }
+
+        public void CastFixedSize(string name, int w, int h)
+        {
+            ViewSizeExtension vs = GetViewSize(name);
+            if (vs == null)
+            {
+                AddFixedViewSize(name, w, h);
+            }
+            else
+            {
+                vs.SetFixedSize(w, h);
             }
         }
-        return 0;
-    }
 
-    public ViewSizeExtension GetViewSize(int index)
-    {
-        MethodInfo viewSize = groupObj.GetType().GetMethod("GetGameViewSize");
-        if (viewSize != null)
+        public void RemoveViewSize(int index)
         {
-            object view = viewSize.Invoke(groupObj, new object[] { index });
-            if (view != null)
+            MethodInfo remove = groupObj.GetType().GetMethod("RemoveCustomSize");
+            if (remove != null)
             {
-                return new ViewSizeExtension(view);
+                remove.Invoke(groupObj, new object[] { index });
             }
         }
-        return null;
-    }
 
-    public ViewSizeExtension GetViewSize(string name)
-    {
-        int count = GetCount();
-        for (int i = 0; i < count; i++)
+        public bool IsCustomSize(int index)
         {
-            ViewSizeExtension view = GetViewSize(i);
-            if (name.Equals(view.GetName()))
+            MethodInfo isCustomMethod = groupObj.GetType().GetMethod("IsCustomSize");
+            if (isCustomMethod != null)
             {
-                return view;
+                object val = isCustomMethod.Invoke(groupObj, new object[] { index });
+                if (val is bool)
+                {
+                    return (bool)val;
+                }
             }
+            return false;
         }
-        return null;
-    }
 
-    void AddFixedViewSize(string name, int w, int h)
-    {
-        Assembly assembly = typeof(Editor).Assembly;
-
-        Type viewSize = assembly.GetType("UnityEditor.GameViewSize");
-        Type type = assembly.GetType("UnityEditor.GameViewSizeType");
-
-        ConstructorInfo constructor = viewSize.GetConstructor(new Type[] { type, typeof(int), typeof(int), typeof(string) });
-
-        object newSize = constructor.Invoke(new object[] { (int)ViewSizeType.FixedResolution, w, h, name });
-
-        groupObj.GetType().GetMethod("AddCustomSize").Invoke(groupObj, new object[] { newSize });
-    }
-
-    public void CastFixedSize(string name, int w, int h)
-    {
-        ViewSizeExtension vs = GetViewSize(name);
-        if (vs == null)
+        public void Clear()
         {
-            AddFixedViewSize(name, w, h);
-        }
-        else
-        {
-            vs.SetFixedSize(w, h);
-        }
-    }
-
-    public void RemoveViewSize(int index)
-    {
-        MethodInfo remove = groupObj.GetType().GetMethod("RemoveCustomSize");
-        if (remove != null)
-        {
-            remove.Invoke(groupObj, new object[] { index });
-        }
-    }
-
-    public bool IsCustomSize(int index)
-    {
-        MethodInfo isCustomMethod = groupObj.GetType().GetMethod("IsCustomSize");
-        if (isCustomMethod != null)
-        {
-            object val = isCustomMethod.Invoke(groupObj, new object[] { index });
-            if (val is bool)
+            int count = GetCount();
+            for (int i = count - 1; i >= 0; i--)
             {
-                return (bool)val;
-            }
-        }
-        return false;
-    }
-
-    public void Clear()
-    {
-        int count = GetCount();
-        for (int i = count - 1; i >= 0; i--)
-        {
-            if (IsCustomSize(i))
-            {
-                RemoveViewSize(i);
+                if (IsCustomSize(i))
+                {
+                    RemoveViewSize(i);
+                }
             }
         }
     }
