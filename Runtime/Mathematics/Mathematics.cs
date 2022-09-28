@@ -979,5 +979,8 @@ namespace Quartzified.Mathematics
         }
 
         #endregion
+
+        public static decimal Truncate(decimal a) => Math.Truncate(a);
+        public static double Truncate(double a) => Math.Truncate(a);
     }
 }
