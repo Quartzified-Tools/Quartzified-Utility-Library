@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Quartzified.Debug
+namespace Quartzified
 {
     public static class DebugExtension
     {

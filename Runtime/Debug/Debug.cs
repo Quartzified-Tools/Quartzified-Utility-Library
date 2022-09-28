@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Quartzified.Debug
+namespace Quartzified
 {
     public static class Debug
     {
@@ -129,7 +129,7 @@ namespace Quartzified.Debug
                 return "[" + DateTime.Now.ToString("HH:mm:ss") + "] ";
             }
 
-            public static string MakeClear(string snippet)
+            static string MakeClear(string snippet)
             {
                 string temp = snippet;
                 if (!int.TryParse(temp, out _))
@@ -139,12 +139,12 @@ namespace Quartzified.Debug
                 return snippet;
             }
 
-            public static string MakeError(string snippet)
+            static string MakeError(string snippet)
             {
                 return string.Format("<color=#ff0000>{0}</color>", snippet);
             }
 
-            public static string IncludesNumbers(string snippet)
+            static string IncludesNumbers(string snippet)
             {
                 string temp = snippet;
 
