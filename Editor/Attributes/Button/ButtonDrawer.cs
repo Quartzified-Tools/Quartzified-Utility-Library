@@ -1,19 +1,13 @@
 using UnityEngine;
-using UnityEngine.UIElements;
-
-
-#if UNITY_EDITOR
-using System;
 using UnityEditor;
 
-namespace lol
+namespace Quartzified.EditorAttributes
 {
     [CustomPropertyDrawer(typeof(ButtonAttribute), false)]
     public class ButtonDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            Debug.Log("Trying to Render Button");
             string methodName = (attribute as ButtonAttribute).methodName;
             if (string.IsNullOrEmpty(methodName))
             {
@@ -42,6 +36,3 @@ namespace lol
         }
     }
 }
-
-
-#endif

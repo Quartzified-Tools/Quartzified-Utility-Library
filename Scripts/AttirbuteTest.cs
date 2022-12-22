@@ -1,35 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Quartzified.EditorAttributes;
-using HeaderAttribute = Quartzified.EditorAttributes.HeaderAttribute;
 
 public class AttirbuteTest : MonoBehaviour
 {
-    [Title("")]
+    [Title("Title Red", "Red")]
     public string bigBoiTitle;
 
-    [Header("Imagine this doesnt work")]
+    [Title("Imagine this doesnt work", 13)]
     public string totally;
 
-    [Header("But in red this would be way cooler", "fsdfs")]
-    public string yeaRight;
+    [Layer]
+    public string stringLayer;
 
-    //[Button]
-    //Nothing here to reference
+    [Layer]
+    public int intLayer;
 
-    void AutoReferenceButtonTest()
+    [Tag]
+    public string stringTag;
+
+    [Tag]
+    public int intTag;
+
+    [Button("TestAttributes")]
+    public bool checkAttributes;
+
+    public void TestAttributes()
     {
-        Debug.Log("Auto Reference has worked");
+
     }
-
-    //[Button("WithReferenceButtonTest")]
-    public bool test2; // Has bool to stick too
-
-    public void WithReferenceButtonTest()
-    {
-        Debug.Log("With Reference has Worked");
-    }
-
-
 }

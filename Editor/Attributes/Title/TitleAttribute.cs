@@ -1,14 +1,13 @@
 using System;
 using UnityEngine;
-using Quartzified.UI;
 
 namespace Quartzified.EditorAttributes
 {
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public class TitleAttribute : PropertyAttribute
     {
         public readonly string header;
-        public readonly int fontSize = 18;
+        public readonly int fontSize = 13;
         public readonly Color color = Color.white;
 
         public TitleAttribute(string header)
@@ -32,6 +31,19 @@ namespace Quartzified.EditorAttributes
         {
             this.header = header;
             this.fontSize = fontSize;
+        }
+
+        public TitleAttribute(string header, int fontSize, string color)
+        {
+            this.header = header;
+            this.fontSize = fontSize;
+
+            if (ColorUtility.TryParseHtmlString(color, out this.color))
+            {
+                return;
+            }
+
+            this.color = Color.red;
         }
     }
 

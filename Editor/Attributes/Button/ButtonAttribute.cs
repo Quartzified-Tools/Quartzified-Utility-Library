@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace lol
+namespace Quartzified.EditorAttributes
 {
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
     public class ButtonAttribute : PropertyAttribute

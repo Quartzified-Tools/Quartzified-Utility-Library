@@ -1,7 +1,10 @@
 {
     "name": "Quartzified.Editor",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:51f86d501b19171449b1a9df84acf6c2",
+        "GUID:9a99cb463272f984481a6ca30e2e574e"
+    ],
     "includePlatforms": [
         "Editor"
     ],

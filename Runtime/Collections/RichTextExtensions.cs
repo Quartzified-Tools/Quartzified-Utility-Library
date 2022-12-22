@@ -26,6 +26,6 @@ namespace Quartzified.Collections
 
         public static string SetColor(this string s, string color) => string.Format("<color={1}>{0}</color>", s, color);
 
-        public static string SetColor(this string s, Color color) => string.Format("<color={1}>{0}</color>", s, ColorUtility.ToHtmlStringRGB(color));
+        public static string SetColor(this string s, Color color) => string.Format("<color=#{1}>{0}</color>", s, ColorUtility.ToHtmlStringRGB(color));
     }
 }
