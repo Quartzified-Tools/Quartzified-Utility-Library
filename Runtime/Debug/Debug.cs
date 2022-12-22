@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Quartzified.Debug
+namespace Quartzified
 {
     public static class Debug
     {
@@ -16,7 +15,7 @@ namespace Quartzified.Debug
             string message = string.Format(format, args);
             Log(message);
         }
-        public static void LogFormat(UnityEngine.Object @object, string format, params object[] args)
+        public static void LogFormat(Object @object, string format, params object[] args)
         {
             string message = string.Format(format, args);
             Log(@object, message);
@@ -24,11 +23,19 @@ namespace Quartzified.Debug
 
         public static void Log(string message)
         {
+#if UNITY_EDITOR
             UnityEngine.Debug.Log(LogStart + Utility.Beutify(message, LogType.Log).TrimEnd());
+#else
+            UnityEngine.Debug.Log(Utility.GetLogTime() + "Debug: " + message);
+#endif
         }
-        public static void Log(UnityEngine.Object @object, string message)
+        public static void Log(Object @object, string message)
         {
+#if UNITY_EDITOR
             UnityEngine.Debug.Log(LogStart + Utility.Beutify(message, LogType.Log).TrimEnd(), @object);
+#else
+            UnityEngine.Debug.Log(Utility.GetLogTime() + "Debug: " + message,  @object);
+#endif
         }
 
         #endregion
@@ -40,7 +47,7 @@ namespace Quartzified.Debug
             string message = string.Format(format, args);
             LogWarning(message);
         }
-        public static void LogWarningFormat(UnityEngine.Object @object, string format, params object[] args)
+        public static void LogWarningFormat(Object @object, string format, params object[] args)
         {
             string message = string.Format(format, args);
             LogWarning(@object, message);
@@ -48,11 +55,19 @@ namespace Quartzified.Debug
 
         public static void LogWarning(string message)
         {
+#if UNITY_EDITOR
             UnityEngine.Debug.LogWarning(LogWarningStart + Utility.Beutify(message, LogType.Warning).TrimEnd());
+#else
+            UnityEngine.Debug.LogWarning(Utility.GetLogTime() + "Debug Warning: " + message);
+#endif
         }
-        public static void LogWarning(UnityEngine.Object @object, string message)
+        public static void LogWarning(Object @object, string message)
         {
+#if UNITY_EDITOR
             UnityEngine.Debug.LogWarning(LogWarningStart + Utility.Beutify(message, LogType.Warning).TrimEnd(), @object);
+#else
+            UnityEngine.Debug.LogWarning(Utility.GetLogTime() + "Debug Warning: " + message, @object);
+#endif
         }
 
         #endregion
@@ -64,7 +79,7 @@ namespace Quartzified.Debug
             string message = string.Format(format, args);
             LogError(message);
         }
-        public static void LogErrorFormat(UnityEngine.Object @object, string format, params object[] args)
+        public static void LogErrorFormat(Object @object, string format, params object[] args)
         {
             string message = string.Format(format, args);
             LogError(@object, message);
@@ -72,29 +87,24 @@ namespace Quartzified.Debug
 
         public static void LogError(string message)
         {
+#if UNITY_EDITOR
             UnityEngine.Debug.LogError(LogErrorStart + Utility.Beutify(message, LogType.Error).TrimEnd());
+#else
+            UnityEngine.Debug.LogError(Utility.GetLogTime() + "Debug Error: " + message);
+#endif        
         }
-        public static void LogError(UnityEngine.Object @object, string message)
+        public static void LogError(Object @object, string message)
         {
+#if UNITY_EDITOR
             UnityEngine.Debug.LogError(LogErrorStart + Utility.Beutify(message, LogType.Error).TrimEnd(), @object);
+#else
+            UnityEngine.Debug.LogError(Utility.GetLogTime() + "Debug Error: " + message, @object);
+#endif
         }
 
         #endregion
 
-        #region ServerLog
-
-        /// <summary>
-        /// Method for Headless Debugging (with time stamp)
-        /// </summary>
-        /// <param name="message"></param>
-        public static void ServerLog(string message)
-        {
-            UnityEngine.Debug.Log(Utility.GetLogTime() + message);
-        }
-
-        #endregion
-
-        public static void LogException(UnityEngine.Object @object, System.Exception exception)
+        public static void LogException(Object @object, System.Exception exception)
         {
             UnityEngine.Debug.LogException(exception, @object);
         }
@@ -126,10 +136,10 @@ namespace Quartzified.Debug
 
             public static string GetLogTime()
             {
-                return "[" + DateTime.Now.ToString("HH:mm:ss") + "] ";
+                return "[" + System.DateTime.Now.ToString("HH:mm:ss") + "] ";
             }
 
-            public static string MakeClear(string snippet)
+            static string MakeClear(string snippet)
             {
                 string temp = snippet;
                 if (!int.TryParse(temp, out _))
@@ -139,12 +149,12 @@ namespace Quartzified.Debug
                 return snippet;
             }
 
-            public static string MakeError(string snippet)
+            static string MakeError(string snippet)
             {
                 return string.Format("<color=#ff0000>{0}</color>", snippet);
             }
 
-            public static string IncludesNumbers(string snippet)
+            static string IncludesNumbers(string snippet)
             {
                 string temp = snippet;
 

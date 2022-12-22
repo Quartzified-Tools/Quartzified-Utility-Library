@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Quartzified.Mathematics.Raycasts
 {
@@ -63,5 +64,41 @@ namespace Quartzified.Mathematics.Raycasts
 
             return result;
         }
+
+        #region UI Raycasting
+
+        public static RaycastResult RaycastUI(Vector2 screenPos)
+        {
+            List<RaycastResult> hitResults = CastIntoUI(ScreenPosToPointerData(screenPos));
+
+            return hitResults.Count > 0 ? hitResults[0] : new RaycastResult();
+        }
+
+        public static bool IsPointerOverUI(Vector2 screenPos)
+        {
+            List<RaycastResult> hitResults = CastIntoUI(ScreenPosToPointerData(screenPos));
+            if(hitResults.Count > 0)
+            {
+                GameObject first = hitResults[0].gameObject;
+                if (first != null && first.layer == LayerMask.NameToLayer("UI"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        static List<RaycastResult> CastIntoUI(PointerEventData pointerData)
+        {
+            var results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerData, results);
+
+            return results;
+        }
+
+        static PointerEventData ScreenPosToPointerData(Vector2 screenPos) => new(EventSystem.current) { position = screenPos };
+
+        #endregion
     }
 }

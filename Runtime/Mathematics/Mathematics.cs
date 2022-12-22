@@ -5,6 +5,7 @@ namespace Quartzified.Mathematics
 {
     public static class Mathematics
     {
+
         #region GetSum
 
         /// <summary>
@@ -128,7 +129,7 @@ namespace Quartzified.Mathematics
         #region GetMedian
 
         /// <summary>
-        /// Returns the Median (Does not return decimals)
+        /// Returns the Median
         /// </summary>
         /// <param name="inputs"></param>
         /// <returns></returns>
@@ -386,10 +387,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static int GetMin(int[] inputs)
         {
-            int[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[0];
+            int min = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] < min)
+                    min = inputs[i];
+            }
+
+            return min;
         }
 
         /// <summary>
@@ -399,10 +407,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static float GetMin(float[] inputs)
         {
-            float[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[0];
+            float min = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] < min)
+                    min = inputs[i];
+            }
+
+            return min;
         }
 
         /// <summary>
@@ -412,10 +427,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static double GetMin(double[] inputs)
         {
-            double[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[0];
+            double min = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] < min)
+                    min = inputs[i];
+            }
+
+            return min;
         }
 
         /// <summary>
@@ -425,10 +447,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static decimal GetMin(decimal[] inputs)
         {
-            decimal[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[0];
+            decimal min = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] < min)
+                    min = inputs[i];
+            }
+
+            return min;
         }
 
         #endregion
@@ -442,10 +471,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static int GetMax(int[] inputs)
         {
-            int[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[temp.Length - 1];
+            int max = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] > max)
+                    max = inputs[i];
+            }
+
+            return max;
         }
 
         /// <summary>
@@ -455,10 +491,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static float GetMax(float[] inputs)
         {
-            float[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[temp.Length - 1];
+            float max = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] > max)
+                    max = inputs[i];
+            }
+
+            return max;
         }
 
         /// <summary>
@@ -468,10 +511,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static double GetMax(double[] inputs)
         {
-            double[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[temp.Length - 1];
+            double max = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] > max)
+                    max = inputs[i];
+            }
+
+            return max;
         }
 
         /// <summary>
@@ -481,10 +531,17 @@ namespace Quartzified.Mathematics
         /// <returns></returns>
         public static decimal GetMax(decimal[] inputs)
         {
-            decimal[] temp = inputs;
-            Array.Sort(temp);
+            if (inputs.Length == 0)
+                return 0;
 
-            return temp[temp.Length - 1];
+            decimal max = inputs[0];
+            for (int i = 1; i < inputs.Length; i++)
+            {
+                if (inputs[i] > max)
+                    max = inputs[i];
+            }
+
+            return max;
         }
 
         #endregion
@@ -496,40 +553,28 @@ namespace Quartzified.Mathematics
         /// </summary>
         /// <param name="inputs"></param>
         /// <returns></returns>
-        public static int GetRange(int[] inputs)
-        {
-            return GetMax(inputs) - GetMin(inputs);
-        }
+        public static int GetRange(int[] inputs) => GetMax(inputs) - GetMin(inputs);
 
         /// <summary>
         /// Returns the Range
         /// </summary>
         /// <param name="inputs"></param>
         /// <returns></returns>
-        public static float GetRange(float[] inputs)
-        {
-            return GetMax(inputs) - GetMin(inputs);
-        }
+        public static float GetRange(float[] inputs) => GetMax(inputs) - GetMin(inputs);
 
         /// <summary>
         /// Returns the Range
         /// </summary>
         /// <param name="inputs"></param>
         /// <returns></returns>
-        public static double GetRange(double[] inputs)
-        {
-            return GetMax(inputs) - GetMin(inputs);
-        }
+        public static double GetRange(double[] inputs) => GetMax(inputs) - GetMin(inputs);
 
         /// <summary>
         /// Returns the Range
         /// </summary>
         /// <param name="inputs"></param>
         /// <returns></returns>
-        public static decimal GetRange(decimal[] inputs)
-        {
-            return GetMax(inputs) - GetMin(inputs);
-        }
+        public static decimal GetRange(decimal[] inputs) => GetMax(inputs) - GetMin(inputs);
 
         #endregion
 
@@ -541,10 +586,7 @@ namespace Quartzified.Mathematics
         /// <param name="value"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public static int GetPercent(int value, int total)
-        {
-            return (value * 100) / total;
-        }
+        public static int GetPercent(int value, int total) => (value * 100) / total;
 
         /// <summary>
         /// Returns the Percentage
@@ -552,10 +594,7 @@ namespace Quartzified.Mathematics
         /// <param name="value"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public static float GetPercent(float value, float total)
-        {
-            return (value * 100f) / total;
-        }
+        public static float GetPercent(float value, float total) => (value* 100f) / total;
 
         /// <summary>
         /// Returns the Percentage
@@ -563,10 +602,7 @@ namespace Quartzified.Mathematics
         /// <param name="value"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public static double GetPercent(double value, double total)
-        {
-            return (value * 100) / total;
-        }
+        public static double GetPercent(double value, double total) => (value * 100d) / total;
 
         /// <summary>
         /// Returns the Percentage
@@ -574,12 +610,15 @@ namespace Quartzified.Mathematics
         /// <param name="value"></param>
         /// <param name="total"></param>
         /// <returns></returns>
-        public static decimal GetPercent(decimal value, decimal total)
-        {
-            return (value * 100) / total;
-        }
+        public static decimal GetPercent(decimal value, decimal total) => (value * 100) / total;
 
         #endregion
+
+        public static float Sqrt(float a) => (float)Math.Sqrt(a);
+        public static double Sqrt(double a) => (double)Math.Sqrt(a);
+
+        public static float Abs(float a) => (float)Math.Abs(a);
+        public static double Abs(double a) => (double)Math.Abs(a);
 
         #region Percent Utility
 
@@ -777,6 +816,40 @@ namespace Quartzified.Mathematics
 
         #endregion
 
+        #region Round / Floor / Ceil
+
+        #region Round
+
+        public static float Round(float a) => (float)Math.Round(a);
+        public static double Round(double a) => (double)Math.Round(a);
+
+        public static int RoundToInt(float a) => (int)Math.Round(a);
+        public static int RoundToInt(double a) => (int)Math.Round(a);
+
+        #endregion
+
+        #region Floor
+
+        public static float Floor(float a) => (float)Math.Floor(a);
+        public static double Floor(double a) => (double)Math.Floor(a);
+
+        public static int FloorToInt(float a) => (int)Math.Floor(a);
+        public static int FloorToInt(double a) => (int)Math.Floor(a);
+
+        #endregion
+
+        #region Ceil
+
+        public static float Ceil(float a) => (float)Math.Ceiling(a);
+        public static double Ceil(double a) => (double)Math.Ceiling(a);
+
+        public static int CeilToInt(float a) => (int)Math.Ceiling(a);
+        public static int CeilToInt(double a) => (int)Math.Ceiling(a);
+
+        #endregion
+
+        #endregion
+
         #region To Type
 
         public static int ToInt(this string value, int defaultValue = 0)
@@ -801,6 +874,8 @@ namespace Quartzified.Mathematics
 
         #endregion
 
+        #region Remap
+
         public static float Remap(float value, float f1, float t1, float f2, float t2)
         {
             return (value - f1) / (t1 - f1) * (t2 - f2) + f2;
@@ -815,6 +890,10 @@ namespace Quartzified.Mathematics
         {
             return (value - f1) / (t1 - f1) * (t2 - f2) + f2;
         }
+
+        #endregion
+
+        #region Lerp
 
         public static int Lerp(int a, int b, float t)
         {
@@ -836,7 +915,34 @@ namespace Quartzified.Mathematics
             return a + (b - a) * t;
         }
 
+        #endregion
+
         #region Angles
+
+        #region Basics
+
+        public static float Sin(float a) => (float)Math.Sin(a);
+        public static double Sin(double a) => Math.Sin(a);
+
+        public static float Cos(float a) => (float)Math.Cos(a);
+        public static double Cos(double a) => Math.Cos(a);
+
+        public static float Tan(float a) => (float)Math.Tan(a);
+        public static double Tan(double a) => Math.Tan(a);
+
+        public static float Asin(float a) => (float)Math.Asin(a);
+        public static double Asin(double a) => Math.Asin(a);
+
+        public static float Acos(float a) => (float)Math.Acos(a);
+        public static double Acos(double a) => Math.Acos(a);
+
+        public static float Atan(float a) => (float)Math.Atan(a);
+        public static double Atan(double a) => Math.Atan(a);
+
+        public static float Atan(float x, float y) => (float)Math.Atan2(y, x);
+        public static double Atan(double x, double y) => (double)Math.Atan2(y, x);
+
+        #endregion
 
         public static float Angle(float x1, float y1, float x2, float y2)
         {
@@ -873,5 +979,8 @@ namespace Quartzified.Mathematics
         }
 
         #endregion
+
+        public static decimal Truncate(decimal a) => Math.Truncate(a);
+        public static double Truncate(double a) => Math.Truncate(a);
     }
 }
