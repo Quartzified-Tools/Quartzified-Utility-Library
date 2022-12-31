@@ -820,8 +820,8 @@ namespace Quartzified.Mathematics
 
         #region Round
 
-        public static float Round(float a) => (float)Math.Round(a);
-        public static double Round(double a) => (double)Math.Round(a);
+        public static float Round(float a, int digits = 0) => (float)Math.Round(a, digits);
+        public static double Round(double a, int digits = 0) => Math.Round(a, digits);
 
         public static int RoundToInt(float a) => (int)Math.Round(a);
         public static int RoundToInt(double a) => (int)Math.Round(a);
@@ -841,7 +841,7 @@ namespace Quartzified.Mathematics
         #region Ceil
 
         public static float Ceil(float a) => (float)Math.Ceiling(a);
-        public static double Ceil(double a) => (double)Math.Ceiling(a);
+        public static double Ceil(double a) => Math.Ceiling(a);
 
         public static int CeilToInt(float a) => (int)Math.Ceiling(a);
         public static int CeilToInt(double a) => (int)Math.Ceiling(a);
