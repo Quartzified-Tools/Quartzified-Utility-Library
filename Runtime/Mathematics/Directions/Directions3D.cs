@@ -26,26 +26,26 @@ namespace Quartzified.Mathematics.Directions
             float yStrength = (float)Math.Pow(y, 2);
             float zStrength = (float)Math.Pow(z, 2);
 
-            if (zStrength >= xStrength)
+            if (zStrength >= yStrength)
             {
-                if (zStrength >= yStrength) // Z is Better
+                if (zStrength >= xStrength) // Z is Better
                 {
                     return z >= 0 ? Direction3D.Forward : Direction3D.Back;
                 }
-                else // Y is Better
+                else // X is Better
                 {
-                    return y >= 0 ? Direction3D.Up : Direction3D.Down;
+                    return x >= 0 ? Direction3D.Right : Direction3D.Left;
                 }
             }
             else
             {
-                if (xStrength >= yStrength) // X is Better
-                {
-                    return x >= 0 ? Direction3D.Right : Direction3D.Left;
-                }
-                else // Y is Better
+                if (yStrength >= xStrength) // Y is Better
                 {
                     return y >= 0 ? Direction3D.Up : Direction3D.Down;
+                }
+                else // X is Better
+                {
+                    return x >= 0 ? Direction3D.Right : Direction3D.Left;
                 }
             }
         }
@@ -60,26 +60,26 @@ namespace Quartzified.Mathematics.Directions
             float yStrength = (float)Math.Pow(y, 2);
             float zStrength = (float)Math.Pow(z, 2);
 
-            if (zStrength >= xStrength)
+            if (zStrength >= yStrength)
             {
-                if (zStrength >= yStrength) // Z is Better
+                if (zStrength >= xStrength) // Z is Better
                 {
                     return z >= 0 ? Direction3D.Forward : Direction3D.Back;
                 }
-                else // Y is Better
+                else // X is Better
                 {
-                    return y >= 0 ? Direction3D.Up : Direction3D.Down;
+                    return x >= 0 ? Direction3D.Right : Direction3D.Left;
                 }
             }
             else
             {
-                if (xStrength >= yStrength) // X is Better
-                {
-                    return x >= 0 ? Direction3D.Right : Direction3D.Left;
-                }
-                else // Y is Better
+                if (yStrength >= xStrength) // Y is Better
                 {
                     return y >= 0 ? Direction3D.Up : Direction3D.Down;
+                }
+                else // X is Better
+                {
+                    return x >= 0 ? Direction3D.Right : Direction3D.Left;
                 }
             }
         }
