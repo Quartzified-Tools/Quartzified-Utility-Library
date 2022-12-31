@@ -4,7 +4,7 @@ using System;
 
 public class MathematicsTests
 {
-    int[] ints = new int[] { 12, 15, 19, 10, 0, 1 ,10};
+    int[] ints = new int[] { 12, 15, 19, 10, 0, 1, 10 };
     float[] floats = new float[] { 12.2f, 15.1f, 19f, 10.9f, 0.2f, 1f, 0.2f };
     double[] doubles = new double[] { 12.256, 15.153, 19.23, 10.9, 0.211, 1.76, 10.9 };
     decimal[] decimals = new decimal[] { 98766, 1123, 1123, 34532, 76547645, 25153545765, 2555555555555 };
@@ -298,7 +298,7 @@ public class MathematicsTests
     [Test]
     public void GetPercent_Int()
     {
-        int percent = Mathematics.GetPercent(10 , 90);
+        int percent = Mathematics.GetPercent(10, 90);
 
         Assert.AreEqual(11, percent);
         Assert.NotZero(percent);
@@ -460,7 +460,7 @@ public class MathematicsTests
         double round4 = Mathematics.Round(16.95d, 1);
 
         Assert.AreEqual(2.2f, round1);
-        Assert.AreEqual(17f, round2); 
+        Assert.AreEqual(17f, round2);
         Assert.AreEqual(2.47d, round3);
         Assert.AreEqual(17d, round4);
     }
