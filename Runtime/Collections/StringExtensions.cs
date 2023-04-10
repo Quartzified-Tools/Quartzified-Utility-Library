@@ -332,6 +332,12 @@ namespace Quartzified.Collections
             return true;
         }
 
+        /// <summary>
+        /// Checks if the input string contains spaces
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static bool HasSpaces(this string input) => input.Contains(" ");
 
         #region Split
 
