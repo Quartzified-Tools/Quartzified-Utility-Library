@@ -4,6 +4,8 @@ namespace Quartzified.Common
 {
     public class EnumExtensions
     {
+        static Random random = new Random();
+
         public static T Parse<T>(string value)
         {
             return (T)Enum.Parse(typeof(T), value);
@@ -27,6 +29,12 @@ namespace Quartzified.Common
             }
 
             return setBits;
+        }
+
+        public static T GetRandomEnum<T>()
+        {
+            Array values = Enum.GetValues(typeof(T));
+            return (T)values.GetValue(random.Next(values.Length));
         }
     }
 }
