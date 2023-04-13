@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -38,7 +39,6 @@ namespace Quartzified.Collections
         public static bool IsNullOrEmpty(this string input)
         {
             return string.IsNullOrEmpty(input);
-            
         }
         public static bool IsNotNullOrEmpty(this string input)
         {
@@ -78,9 +78,7 @@ namespace Quartzified.Collections
 
         public static string ToTitleCase(this string input)
         {
-            var cultureInfo = CultureInfo.CurrentCulture;
-            var textInfo = cultureInfo.TextInfo;
-            return textInfo.ToTitleCase(input);
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input);
         }
 
         /// <summary>
@@ -106,6 +104,22 @@ namespace Quartzified.Collections
         public static string ReplaceString(this string masterString, string goodString, string badString)
         {
             return IsNullOrEmpty(masterString) ? masterString : masterString.Replace(badString, goodString);
+        }
+
+        /// <summary>
+        /// Replaces the first occurrence of a specified substring with another string.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="oldValue"></param>
+        /// <param name="newValue"></param>
+        /// <returns></returns>
+        public static string ReplaceFirstOccurrence(this string input, string oldValue, string newValue)
+        {
+            int startIndex = input.IndexOf(oldValue);
+            if (startIndex == -1)
+                return input;
+
+            return input.Remove(startIndex, oldValue.Length).Insert(startIndex, newValue);  
         }
 
         /// <summary>
@@ -333,11 +347,52 @@ namespace Quartzified.Collections
         }
 
         /// <summary>
-        /// Checks if the input string contains spaces
+        /// Checks if the input string contains spaces.
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         public static bool HasSpaces(this string input) => input.Contains(" ");
+
+        /// <summary>
+        /// Removes all spaces from the input string.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string RemoveWhitespaces(this string input)
+        {
+            return new string(input.ToCharArray().Where(c => !Char.IsWhiteSpace(c)).ToArray());
+        }
+
+        /// <summary>
+        /// Truncates the input to a specified length and adds an ellipsis at the end if the string was to long.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="maxLength"></param>
+        /// <returns></returns>
+        public static string Truncate(this string input, int maxLength)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            return input.Length <= maxLength ? input : input.Substring(0, maxLength) + "...";
+        }
+
+        /// <summary>
+        /// Checks if the input is a valid Email address.
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static bool IsEmail(this string input)
+        {
+            if (input.IsNullOrWhiteSpace())
+                return false;
+
+            if (input.HasSpaces())
+                return false;
+
+            Regex regex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            return regex.IsMatch(input);
+        }
 
         #region Split
 

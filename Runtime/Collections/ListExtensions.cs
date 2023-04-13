@@ -84,7 +84,6 @@ namespace Quartzified.Collections
                 .Select(group => group.Key).ToList();
         }
 
-
         #endregion
 
         public static void ShuffleInto<T>(this IReadOnlyList<T> source, IList<T> target)
@@ -110,6 +109,20 @@ namespace Quartzified.Collections
                     list[i] = list[j];
                 }
                 list[j] = i;
+            }
+        }
+
+        public static void Reverse<T>(this IList<T> list)
+        {
+            int i = 0;
+            int j = list.Count - 1;
+            while (i < j)
+            {
+                T temp = list[i];
+                list[i] = list[j];
+                list[j] = temp;
+                i++;
+                j--;
             }
         }
 
