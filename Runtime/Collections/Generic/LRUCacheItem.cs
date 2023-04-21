@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-namespace Quartzified.Collections
+namespace Quartzified.Collections.Generic
 {
     public class LRUCacheItem<Key, Value>
     {

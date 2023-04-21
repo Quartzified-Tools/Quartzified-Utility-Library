@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Quartzified.Collections
+namespace Quartzified.Collections.Generic
 {
     public class LRUCache<Key, Value>
     {

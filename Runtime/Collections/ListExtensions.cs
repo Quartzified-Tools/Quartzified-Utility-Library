@@ -70,7 +70,7 @@ namespace Quartzified.Collections
         }
 
         /// <summary>
-        /// Returns a List of duplicate entries found in the given List.
+        /// Returns a IList of duplicate entries found in the given IList.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="U"></typeparam>
@@ -78,6 +78,21 @@ namespace Quartzified.Collections
         /// <param name="keySelector"></param>
         /// <returns></returns>
         public static IList<U> FindDuplicates<T, U>(this IList<T> list, Func<T, U> keySelector)
+        {
+            return list.GroupBy(keySelector)
+                .Where(group => group.Count() > 1)
+                .Select(group => group.Key).ToList();
+        }
+
+        /// <summary>
+        /// Returns a List of duplicate entries found in the given List.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="U"></typeparam>
+        /// <param name="list"></param>
+        /// <param name="keySelector"></param>
+        /// <returns></returns>
+        public static List<U> FindDuplicates<T, U>(this List<T> list, Func<T, U> keySelector)
         {
             return list.GroupBy(keySelector)
                 .Where(group => group.Count() > 1)
